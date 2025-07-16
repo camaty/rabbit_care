@@ -466,6 +466,8 @@ async function handlePhotoUpload(event) {
             timeStr: new Date().toLocaleTimeString('ja-JP')
         };
         
+        console.log('Saving photo entry:', photoEntry); // Debug log
+        
         await appendStorageData('photos', photoEntry);
         await displayPhotoGallery();
         await displayRecentEntries();
@@ -690,10 +692,14 @@ async function displayRecentEntries() {
     const weights = await getStorageData('weights') || [];
     const photos = await getStorageData('photos') || [];
     
+    console.log('Raw photos data:', photos); // Debug log
+    
     const allEntries = [
-        ...weights.map(w => ({...w, type: 'weight'})),
-        ...photos.map(p => ({...p, type: 'photo'}))
+        ...weights.map(w => ({...w, entryType: 'weight'})),
+        ...photos.map(p => ({...p, entryType: 'photo'}))
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    console.log('All entries:', allEntries); // Debug log
     
     const recentEntries = allEntries.slice(0, 5);
     const container = document.getElementById('recent-entries');
@@ -704,10 +710,12 @@ async function displayRecentEntries() {
     }
     
     container.innerHTML = recentEntries.map(entry => {
-        if (entry.type === 'weight') {
+        if (entry.entryType === 'weight') {
             return `<div class="recent-entry">📊 体重: ${entry.weight}g (${entry.dateStr})</div>`;
         } else {
+            console.log('Processing photo entry:', entry, 'type:', entry.type); // Debug log
             const typeText = entry.type === 'fur' ? '毛並み' : 'うんち';
+            console.log('Type text:', typeText, 'entry.type:', entry.type); // More debug
             return `<div class="recent-entry">📸 ${typeText}の写真 (${entry.dateStr})</div>`;
         }
     }).join('');
