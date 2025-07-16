@@ -691,8 +691,8 @@ async function displayRecentEntries() {
     const photos = await getStorageData('photos') || [];
     
     const allEntries = [
-        ...weights.map(w => ({...w, type: 'weight'})),
-        ...photos.map(p => ({...p, type: 'photo'}))
+        ...weights.map(w => ({...w, entryType: 'weight'})),
+        ...photos.map(p => ({...p, entryType: 'photo'}))
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
     
     const recentEntries = allEntries.slice(0, 5);
@@ -704,7 +704,7 @@ async function displayRecentEntries() {
     }
     
     container.innerHTML = recentEntries.map(entry => {
-        if (entry.type === 'weight') {
+        if (entry.entryType === 'weight') {
             return `<div class="recent-entry">📊 体重: ${entry.weight}g (${entry.dateStr})</div>`;
         } else {
             const typeText = entry.type === 'fur' ? '毛並み' : 'うんち';
