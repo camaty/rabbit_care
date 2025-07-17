@@ -2,6 +2,15 @@
 
 ウサギの健康状態を記録・管理するためのモバイルWeb アプリケーションです。
 
+## 技術スタック
+
+- **React** - ユーザーインターフェース
+- **TypeScript** - 型安全性
+- **Vite** - 高速な開発・ビルドツール
+- **PWA** - プログレッシブWebアプリ機能
+- **IndexedDB** - データ永続化
+- **OpenAI API** - AI健康チェック機能
+
 ## 機能
 
 ### 🏠 ホーム画面
@@ -30,6 +39,32 @@
 - ChatGPT を使用した健康状態の分析
 - 体重、毛並み、うんちの状態を総合的に評価
 - 獣医師のアドバイス風の回答
+
+## 開発環境のセットアップ
+
+### 必要条件
+- Node.js 18 以上
+- npm または yarn
+
+### インストール
+```bash
+npm install
+```
+
+### 開発サーバーの起動
+```bash
+npm run dev
+```
+
+### プロダクションビルド
+```bash
+npm run build
+```
+
+### プレビュー
+```bash
+npm run preview
+```
 
 ## 使い方
 
@@ -104,20 +139,41 @@
 ## 開発者向け情報
 
 ### 技術仕様
-- HTML5、CSS3、JavaScript（ES6+）
-- ローカルストレージ API
+- React 19 + TypeScript
+- Vite による高速開発・ビルド
+- IndexedDB API（localStorage フォールバック）
 - Canvas API（グラフ描画）
 - File API（写真処理）
 - Service Worker（PWA）
 
+### プロジェクト構造
+```
+src/
+├── components/       # Reactコンポーネント
+├── types/           # TypeScript型定義
+├── utils/           # ユーティリティ関数
+├── App.tsx          # メインアプリケーション
+├── main.tsx         # エントリーポイント
+└── App.css          # スタイル
+```
+
 ### カスタマイズ
-- `style.css` でデザインのカスタマイズ
-- `script.js` で機能の追加・修正
-- `manifest.json` でPWA設定の変更
+- `src/App.css` でデザインのカスタマイズ
+- `src/components/` でコンポーネントの追加・修正
+- `public/manifest.json` でPWA設定の変更
 
-## GitHub Pages デプロイ
+## デプロイ
 
+### GitHub Pages
 このアプリは GitHub Pages に自動デプロイされます：
-- メインブランチにプッシュすると自動的にデプロイ
+- メインブランチにプッシュすると自動的にビルド・デプロイ
 - PWA として端末にインストール可能
 - https://camaty.github.io/rabbit_care/ でアクセス可能
+
+### その他のプラットフォーム
+- Vercel、Netlify、Heroku等でもデプロイ可能
+- `npm run build` で生成された `dist/` フォルダをアップロード
+
+## ライセンス
+
+MIT License
